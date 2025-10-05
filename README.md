@@ -28,12 +28,12 @@ If you prefer to **skip building** and pull prebuilt images from Docker Hub:
 git clone https://github.com/Arpita4196/Distributed-Chat-System.git
 cd Distributed-Chat-System
 docker compose -f docker-compose.prod.yml up
-
+---
 ## 🌐 Access the App
 - **UI** → http://localhost:5000  
 - **Gateway (gRPC)** → localhost:8080  
 - Other services run internally on their mapped ports (50052–50055).
-
+---
 ## 📝 Notes
 - Make sure you have **Docker** and **Docker Compose** installed.  
 - If you use **Option 1**, every service is rebuilt from source.  
