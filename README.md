@@ -21,6 +21,7 @@ docker compose up
 👉 This will build all services using the Dockerfiles inside the repo.  
 First run may take several minutes as dependencies are installed
 
+### Option 2 — Use Prebuilt Docker Hub Images
 If you prefer to **skip building** and pull prebuilt images from Docker Hub:
 
 ```bash
