@@ -1,0 +1,73 @@
+version: "3.9"
+
+services:
+  db-svc:
+    image: postgres:15
+    container_name: db-svc
+    restart: always
+    environment:
+      POSTGRES_USER: chatuser
+      POSTGRES_PASSWORD: chatpass
+      POSTGRES_DB: chatdb
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chatuser -d chatdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  user-svc:
+    image: arpitadas4196/user-svc:latest
+    container_name: user-svc
+    restart: always
+    depends_on:
+      db-svc:
+        condition: service_healthy
+    ports:
+      - "50052:50051"
+
+  message-svc:
+    image: arpitadas4196/message-svc:latest
+    container_name: message-svc
+    restart: always
+    depends_on:
+      db-svc:
+        condition: service_healthy
+    ports:
+      - "50054:50051"
+
+  room-svc:
+    image: arpitadas4196/room-svc:latest
+    container_name: room-svc
+    restart: always
+    ports:
+      - "50053:50051"
+
+  presence-svc:
+    image: arpitadas4196/presence-svc:latest
+    container_name: presence-svc
+    restart: always
+    ports:
+      - "50055:50051"
+
+  gateway-svc:
+    image: arpitadas4196/gateway-svc:latest
+    container_name: gateway-svc
+    restart: always
+    depends_on:
+      - user-svc
+      - room-svc
+      - presence-svc
+      - message-svc
+    ports:
+      - "8080:50051"
+
+  ui-svc:
+    image: arpitadas4196/ui-svc:latest
+    container_name: ui-svc
+    restart: always
+    depends_on:
+      - gateway-svc
+    ports:
+      - "5000:5000"
