@@ -28,7 +28,7 @@ If you prefer to **skip building** and pull prebuilt images from Docker Hub:
 git clone https://github.com/Arpita4196/Distributed-Chat-System.git
 cd Distributed-Chat-System
 docker compose -f docker-compose.prod.yml up
----
+```
 
 
 ## 🌐 Access the App
