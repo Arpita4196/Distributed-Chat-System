@@ -1,5 +1,7 @@
 # Distributed-Chat-System
-###Object-based-system
+
+# Object-based-system
+
 This is a simple distributed chat system built with **gRPC**, **Flask**, and **Docker Compose**.  
 It consists of multiple services:
 
