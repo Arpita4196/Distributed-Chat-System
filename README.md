@@ -38,10 +38,9 @@ docker compose -f docker-compose.prod.yml up
 - **Gateway (gRPC)** → localhost:8080  
 - Other services run internally on their mapped ports (50052–50055).
 
-
-# Microservice-based-system
-
 ## 📝 Notes
 - Make sure you have **Docker** and **Docker Compose** installed.  
 - If you use **Option 1**, every service is rebuilt from source.  
 - If you use **Option 2**, services are pulled from Docker Hub and run directly.
+
+# Microservice-based-system
