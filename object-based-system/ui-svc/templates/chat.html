@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat</title>
+  <style>
+    #chat-box {
+      border: 1px solid #000;
+      width: 500px;
+      height: 300px;
+      overflow-y: scroll;
+      margin-bottom: 10px;
+      padding: 5px;
+      font-family: Arial, sans-serif;
+    }
+    #chat-box p {
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Chat Room: general</h2>
+
+  <!-- Messages -->
+  <div id="chat-box"></div>
+
+  <!-- Send message form -->
+  <form id="sendForm">
+    <!-- ✅ changed id + name from "text" to "message" -->
+    <input type="text" id="message" name="message" placeholder="Type your message" required>
+    <button type="submit">Send</button>
+  </form>
+
+  <!-- Navigation -->
+  <p>
+    <a href="{{ url_for('logout') }}">Logout</a>
+  </p>
+
+  <script>
+    async function fetchMessages() {
+      try {
+        const res = await fetch("/history");
+        if (!res.ok) return;
+        const data = await res.json();
+        const box = document.getElementById("chat-box");
+        box.innerHTML = "";
+        data.forEach(m => {
+          const p = document.createElement("p");
+          p.innerHTML = `<b>${m.sender}:</b> ${m.content}`;
+          box.appendChild(p);
+        });
+        box.scrollTop = box.scrollHeight; // auto-scroll to bottom
+      } catch (err) {
+        console.error("Failed to fetch messages:", err);
+      }
+    }
+
+    document.getElementById("sendForm").addEventListener("submit", async e => {
+      e.preventDefault();
+      // ✅ updated to use "message"
+      const text = document.getElementById("message").value;
+      if (!text.trim()) return; // ignore empty
+      try {
+        await fetch("/send", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          // ✅ send "message=" instead of "text="
+          body: `message=${encodeURIComponent(text)}`
+        });
+        document.getElementById("message").value = "";
+        fetchMessages();
+      } catch (err) {
+        console.error("Failed to send message:", err);
+      }
+    });
+
+    // Refresh messages every 2 seconds
+    setInterval(fetchMessages, 500);
+    fetchMessages();
+  </script>
+</body>
+</html>

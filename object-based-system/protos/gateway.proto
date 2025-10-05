@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package gateway;
+
+import "user.proto";
+import "message.proto";
+import "room.proto";
+import "presence.proto";
+
+service GatewayService {
+  // User
+  rpc RegisterUser (user.RegisterRequest) returns (user.RegisterResponse);
+  rpc LoginUser (user.LoginRequest) returns (user.LoginResponse);
+
+  // Messaging
+  rpc SendMessage (message.Message) returns (message.SendResponse);
+  rpc GetMessages (message.HistoryRequest) returns (message.HistoryResponse);
+
+  // Rooms
+  rpc CreateRoom (room.CreateRoomRequest) returns (room.CreateRoomResponse);
+  rpc ListRooms (room.ListRoomsRequest) returns (room.ListRoomsResponse);
+
+  // Presence
+  rpc UpdatePresence (presence.PresenceUpdate) returns (presence.PresenceResponse);
+}

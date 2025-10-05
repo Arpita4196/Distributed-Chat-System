@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>History - Room {{ room }}</h2>
+    <ul>
+      {% for m in messages %}
+        <li><b>{{ m.username }}:</b> {{ m.text }}</li>
+      {% endfor %}
+    </ul>
+
+    <p>
+      <a href="{{ url_for('chat') }}">Back to Chat</a> |
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </p>
+  </body>
+</html>

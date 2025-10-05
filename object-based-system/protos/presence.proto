@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package presence;
+
+message PresenceUpdate {
+  string username = 1;
+  bool online = 2;
+}
+
+message PresenceResponse {
+  bool success = 1;
+}
+
+service PresenceService {
+  rpc UpdatePresence (PresenceUpdate) returns (PresenceResponse);
+}
