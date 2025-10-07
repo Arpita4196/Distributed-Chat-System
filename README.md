@@ -15,9 +15,15 @@ It consists of multiple services:
 If you want to build each service locally from Dockerfiles:
 
 ```bash
+# Clone the repo
 git clone https://github.com/Arpita4196/Distributed-Chat-System.git
-cd Distributed-Chat-System
+
+# Move into your project folder
+cd Distributed-Chat-System/object-based-system
+
+# Start the system (will build automatically if needed)
 docker compose up
+
 ```
 
 👉 This will build all services using the Dockerfiles inside the repo.  
