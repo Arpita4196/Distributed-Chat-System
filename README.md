@@ -34,7 +34,7 @@ If you prefer to **skip building** and pull prebuilt images from Docker Hub:
 
 ```bash
 git clone https://github.com/Arpita4196/Distributed-Chat-System.git
-cd Distributed-Chat-System
+cd Distributed-Chat-System/object-based-system
 docker compose -f docker-compose.prod.yml up
 ```
 
