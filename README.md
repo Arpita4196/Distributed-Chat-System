@@ -49,4 +49,22 @@ docker compose -f docker-compose.prod.yml up
 - If you use **Option 1**, every service is rebuilt from source.  
 - If you use **Option 2**, services are pulled from Docker Hub and run directly.
 
+## For performance analysis
+```
+pip install locust
+# Inside the object-based-system folder
+docker compose up
+#or
+docker compose -f docker-compose.prod.yml up
+#In a new terminal (same folder):
+locust --host http://localhost:5000
+#Open the Web UI
+Go to http://localhost:8089 in your browser.
+1.Enter number of users (e.g., 50 or 100).
+
+2.Enter spawn rate (e.g., 5).
+
+3.Start test.
+```
+
 # Microservice-based-system
