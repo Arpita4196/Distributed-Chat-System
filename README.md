@@ -19,7 +19,7 @@ If you want to build each service locally from Dockerfiles:
 git clone https://github.com/Arpita4196/Distributed-Chat-System.git
 
 # Move into your project folder
-cd Distributed-Chat-System/object-based-system
+cd Distributed-Chat-System/object-based-system  #give your project folder path where it is stored
 
 # Start the system (will build automatically if needed)
 docker compose up
@@ -34,7 +34,7 @@ If you prefer to **skip building** and pull prebuilt images from Docker Hub:
 
 ```bash
 git clone https://github.com/Arpita4196/Distributed-Chat-System.git
-cd Distributed-Chat-System/object-based-system
+cd Distributed-Chat-System/object-based-system   #give your project folder path where it is stored
 docker compose -f docker-compose.prod.yml up
 ```
 
@@ -43,6 +43,7 @@ docker compose -f docker-compose.prod.yml up
 - **UI** → http://localhost:5000  
 - **Gateway (gRPC)** → localhost:8080  
 - Other services run internally on their mapped ports (50052–50055).
+- First Register, Then login to send messages
 
 ## 📝 Notes
 - Make sure you have **Docker** and **Docker Compose** installed.  
