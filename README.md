@@ -108,11 +108,6 @@ docker-compose -f deploy/docker-compose.yml up --build -d
 - Create/Join chat rooms by providing room id and name(Ex- room-id: 001, Room Name:Chat Room 1)
 
 
-### **4. Stop the System**
-```bash
-docker-compose -f deploy/docker-compose.yml down
-```
-
 ## ⚙️ Performance Analysis (Load Testing)
 
 ### Setup
@@ -139,6 +134,12 @@ Then follow these steps:
 1. **Enter number of users** — for example, `50` or `100`  
 2. **Enter Ramp up** — for example, `5`  
 3. Click **Start** to begin the load test
+```
+
+### **4. Stop the System**
+```bash
+docker-compose -f deploy/docker-compose.yml down
+```
 
 ## **Features**
 - ✅ User registration and authentication
