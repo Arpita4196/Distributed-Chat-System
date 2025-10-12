@@ -88,7 +88,7 @@ A real-time distributed messaging system built using microservices architecture 
 ### **1. Clone the Repository**
 ```bash
 #Clone Repository
-git https://github.com/Arpita4196/Distributed-Chat-System.git
+git clone https://github.com/Arpita4196/Distributed-Chat-System.git
 
 #Navigate to project folder/deploy
 cd Distributed-Chat-System/Micriservice-System/deploy
