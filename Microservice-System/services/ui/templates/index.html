@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>SMS UI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body{font-family:system-ui,Arial;margin:0;padding:20px}
+    .row{display:flex;gap:16px}
+    .col{flex:1}
+    #messages{height:320px;overflow:auto;border:1px solid #ddd;padding:8px;background:#fafafa}
+    #roster{height:320px;overflow:auto;border:1px solid #ddd;padding:8px}
+    input,button{padding:8px;margin:4px 0}
+    .msg{margin:4px 0}
+    .offset{color:#888;font-size:12px}
+  </style>
+</head>
+<body>
+  <h2>Simple Messaging System (Web UI)</h2>
+
+  <div>
+    <input id="email" placeholder="email" value="you@example.com">
+    <input id="password" type="password" placeholder="password" value="secret">
+    <button onclick="register()">Register</button>
+    <button onclick="login()">Login</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <div>
+    <input id="room" placeholder="room id" value="general">
+    <input id="roomname" placeholder="room name" value="General">
+    <button onclick="createRoom()">Create Room</button>
+    <button onclick="joinRoom()">Join Room</button>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h3>Messages</h3>
+      <div id="messages"></div>
+      <input id="text" placeholder="type a message">
+      <button onclick="send()">Send</button>
+    </div>
+    <div class="col">
+      <h3>Online</h3>
+      <div id="roster"></div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

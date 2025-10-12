@@ -1,0 +1,23 @@
+syntax = "proto3";
+package room.v1;
+
+
+service RoomService {
+	rpc CreateRoom(CreateRoomReq) returns (Ack);
+	rpc JoinRoom(JoinLeaveReq) returns (Ack);
+	rpc LeaveRoom(JoinLeaveReq) returns (Ack);
+	rpc ListRooms(Empty) returns (stream Room);
+	rpc ListMembers(RoomId) returns (stream Member);
+	rpc RoomExists(RoomId) returns (Ack);
+}
+
+
+message Empty {}
+message Ack { bool success = 1; string error = 2; }
+
+
+message CreateRoomReq { string room_id = 1; string name = 2; }
+message RoomId { string room_id = 1; }
+message Room { string room_id = 1; string name = 2; }
+message Member { string user_id = 1; string room_id = 2; }
+message JoinLeaveReq { string room_id = 1; string user_id = 2; }

@@ -1,0 +1,20 @@
+syntax = "proto3";
+package auth.v1;
+
+
+service AuthService {
+	rpc Register(RegisterRequest) returns (AuthResponse);
+	rpc Login(LoginRequest) returns (AuthResponse);
+	rpc Verify(Token) returns (User);
+	rpc Logout(Token) returns (Ack);
+	rpc GetUser(UserId) returns (User);
+}
+
+
+message RegisterRequest { string email = 1; string password = 2; string display_name = 3; }
+message LoginRequest { string email = 1; string password = 2; }
+message AuthResponse { string access_token = 1; }
+message Token { string access_token = 1; }
+message UserId { string user_id = 1; }
+message User { string user_id = 1; string email = 2; string display_name = 3; }
+message Ack { bool success = 1; string error = 2; }

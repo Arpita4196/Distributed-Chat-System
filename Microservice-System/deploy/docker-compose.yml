@@ -1,0 +1,77 @@
+version: "3.9"
+
+services:
+  auth:
+    build:
+      context: ..               # <-- repo root
+      dockerfile: services/auth/Dockerfile
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-devsecret}
+      TOKEN_TTL_SECS: ${TOKEN_TTL_SECS:-3600}
+      REVOCATION_TTL_SECS: ${REVOCATION_TTL_SECS:-3600}
+      AUTH_DB: ${AUTH_DB:-/data/auth.db}
+    volumes: ["authdata:/data"]
+    ports: ["50051:50051"]
+
+  room:
+    build:
+      context: ..
+      dockerfile: services/room/Dockerfile
+    environment:
+      ROOM_DB: ${ROOM_DB:-/data/rooms.db}
+    volumes: ["roomdata:/data"]
+    ports: ["50052:50052"]
+
+  presence:
+    build:
+      context: ..
+      dockerfile: services/presence/Dockerfile
+    environment:
+      PRESENCE_TTL_SECS: ${PRESENCE_TTL_SECS:-20}
+      PRESENCE_DB: ${PRESENCE_DB:-/data/presence.db}
+    volumes: ["presencedata:/data"]
+    ports: ["50053:50053"]
+
+  message:
+    build:
+      context: ..
+      dockerfile: services/message/Dockerfile
+    environment:
+      MESSAGE_DB: ${MESSAGE_DB:-/data/messages.db}
+    volumes: ["messagedata:/data"]
+    ports: ["50054:50054"]
+
+  gateway:
+    build:
+      context: ..
+      dockerfile: services/gateway/Dockerfile
+    environment:
+      AUTH_ADDR: ${AUTH_ADDR:-auth:50051}
+      ROOM_ADDR: ${ROOM_ADDR:-room:50052}
+      PRESENCE_ADDR: ${PRESENCE_ADDR:-presence:50053}
+      MESSAGE_ADDR: ${MESSAGE_ADDR:-message:50054}
+      GATEWAY_BIND: ${GATEWAY_BIND:-:50055}
+    depends_on:
+      - auth
+      - room
+      - presence
+      - message
+    ports: ["50055:50055"]
+
+  ui:
+    build:
+      context: ..
+      dockerfile: services/ui/Dockerfile
+    environment:
+      GATEWAY_ADDR: gateway:50055
+    depends_on:
+      - gateway
+    ports:
+      - "8080:8080"
+
+
+volumes:
+  authdata: {}
+  roomdata: {}
+  messagedata: {}
+  presencedata: {}

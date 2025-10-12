@@ -1,0 +1,41 @@
+syntax = "proto3";
+package gateway.v1;
+
+
+import "auth.proto";
+import "room.proto";
+import "presence.proto";
+import "message.proto";
+
+
+service GatewayService {
+	// Auth proxies
+	rpc Register(auth.v1.RegisterRequest) returns (auth.v1.AuthResponse);
+	rpc Login(auth.v1.LoginRequest) returns (auth.v1.AuthResponse);
+	rpc Logout(auth.v1.Token) returns (auth.v1.Ack);
+	rpc GetUser(auth.v1.UserId) returns (auth.v1.User);
+
+
+	// Room
+	rpc CreateRoom(room.v1.CreateRoomReq) returns (room.v1.Ack);
+	rpc JoinRoom(room.v1.JoinLeaveReq) returns (room.v1.Ack);
+	rpc LeaveRoom(room.v1.JoinLeaveReq) returns (room.v1.Ack);
+	rpc ListRooms(room.v1.Empty) returns (stream room.v1.Room);
+	rpc ListMembers(room.v1.RoomId) returns (stream room.v1.Member);
+
+
+	// Presence
+	rpc Heartbeat(presence.v1.HeartbeatReq) returns (presence.v1.Ack);
+	rpc SubscribePresence(presence.v1.RoomId) returns (stream presence.v1.PresenceEvent);
+	rpc Roster(presence.v1.RoomId) returns (presence.v1.RosterReply);
+
+
+	// Messaging
+	rpc Append(message.v1.AppendReq) returns (message.v1.AppendResp);
+	rpc List(message.v1.ListReq) returns (stream message.v1.Msg);
+	// Resume helper: server streams history then live messages, starting from last_seen
+	rpc ReplayAndSubscribe(ReplayReq) returns (stream message.v1.Msg);
+}
+
+
+message ReplayReq { string room_id = 1; int64 last_seen_offset = 2; }

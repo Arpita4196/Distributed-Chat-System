@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>SMS – Chats</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body{font-family:system-ui,Arial;margin:0;background:#f7f7fb}
+    header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#fff;border-bottom:1px solid #eee}
+    .wrap{display:grid;grid-template-columns:280px 1fr; gap:12px; padding:12px}
+    .panel{background:#fff;border:1px solid #eee;border-radius:12px;padding:12px; display:flex; flex-direction:column; min-height:70vh}
+    #rooms .item{padding:8px;border-radius:8px;cursor:pointer}
+    #rooms .item.active{background:#eef2ff}
+    #messages{flex:1;overflow:auto;border:1px solid #eee;border-radius:8px;padding:8px;background:#fafafa}
+    .msg{margin:4px 0}
+    .offset{color:#888;font-size:12px}
+    input,button{padding:8px;margin:4px 0;border-radius:8px;border:1px solid #ddd}
+    button.primary{background:#4f46e5;color:#fff;border:none}
+  </style>
+</head>
+<body>
+  <header>
+    <div><b>SMS</b> · Logged in as <code>{{ display_name if display_name else user_id }}</code></div>
+    <div>
+        <!-- <input id="newDisplayName" placeholder="change name (UI only)" style="width:220px">
+        <button onclick="saveName()" class="primary">Save</button> -->
+        <button onclick="logout()" class="primary">Logout</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="panel">
+      <h3>Your Rooms</h3>
+      <div id="rooms"></div>
+      <hr/>
+      <input id="newRoomId" placeholder="new-room-id">
+      <input id="newRoomName" placeholder="New Room Name">
+      <button class="primary" onclick="createRoom()">Create</button>
+      <button onclick="joinNew()">Join</button>
+    </div>
+
+    <div class="panel">
+      <h3 id="roomTitle">No room selected</h3>
+      <div id="messages"></div>
+      <div>
+        <input id="text" placeholder="type a message">
+        <button class="primary" onclick="send()">Send</button>
+      </div>
+    </div>
+
+    </div>
+  </div>
+
+  <script src="/static/app.js?v=2"></script>
+</body>
+</html>
