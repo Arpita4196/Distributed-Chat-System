@@ -90,13 +90,16 @@ A real-time distributed messaging system built using microservices architecture 
 #Clone Repository
 git clone https://github.com/Arpita4196/Distributed-Chat-System.git
 
-#Navigate to project folder/deploy
-cd Distributed-Chat-System/Micriservice-System/deploy
+#Navigate to project folder
+cd Distributed-Chat-System/Microservice-System
 ```
 
 ### **2. Start the System**
 ```bash
 docker-compose -f deploy/docker-compose.yml up --build -d
+
+#Check if all the services are up and running
+docker-compose -f deploy/docker-compose.yml ps
 ```
 
 👉 This will build all services using the Dockerfiles and may take several minutes.
@@ -118,11 +121,11 @@ source .venv/bin/activate
 # Install Locust
 pip install locust
 
-# From the deploy folder - cd Distributed-Chat-System/Micriservice-System/deploy
+# From the Project folder - cd Distributed-Chat-System/Microservice-System
 # Skip this if Microservice system is already running
 docker compose -f docker-compose.yml up
 
-# In a new terminal (from project root) - cd Distributed-Chat-System/Micriservice-System
+# In a new terminal (from project root) - cd Distributed-Chat-System/Microservice-System
 locust -f load/locust/locustfile_http.py --host http://localhost:8080
 
 ### 🖥️ Open the Web UI
