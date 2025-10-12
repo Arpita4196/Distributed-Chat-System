@@ -140,11 +140,3 @@ Then follow these steps:
 ```bash
 docker-compose -f deploy/docker-compose.yml down
 ```
-
-## **Features**
-- ✅ User registration and authentication
-- ✅ Real-time messaging with history
-- ✅ Room creation and management
-- ✅ User presence tracking
-- ✅ Message persistence and replay
-- ✅ Auto-reconnection support
